@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shubham Verma | Serial Founder. GTM Architect. Revenue Operator.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+  /* ── Hero ────────────────────────────────────────── */
+  #hero { min-height: 100svh; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+  .hero-inner {
+    flex: 1; display: grid; grid-template-columns: 1fr 380px;
+    gap: 60px; align-items: end;
+    padding: 148px 60px 80px; max-width: 1320px; width: 100%;
+  }
+  .hero-eye {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: .7rem; font-weight: 600;
+    letter-spacing: .13em; text-transform: uppercase; color: var(--tc);
+    margin-bottom: 28px; overflow: hidden;
+  }
+  .hero-eye::before { content:''; width:20px; height:1.5px; background:var(--tc); flex-shrink:0; }
+  .hero-eye .ee { display: block; transform: translateY(110%); animation: slideUp .7s var(--ease) .05s forwards; }
+  .hero-h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(3.8rem, 8.5vw, 9.5rem);
+    line-height: .93; letter-spacing: -.035em; color: var(--ink);
+  }
+  .hline { overflow: hidden; display: block; }
+  .hm { display: block; transform: translateY(110%); animation: slideUp 1s var(--ease) forwards; }
+  .hline:nth-child(1) .hm { animation-delay: .08s; }
+  .hline:nth-child(2) .hm { animation-delay: .20s; }
+  .hline:nth-child(3) .hm { animation-delay: .32s; }
+  .hero-h1 em { font-style: italic; color: var(--tc); }
+  .hero-rt { padding-bottom: 6px; opacity: 0; transform: translateY(20px); animation: fadeUp .9s var(--ease) .44s forwards; }
+  .hero-desc { font-size: .97rem; line-height: 1.82; color: var(--ink-55); margin-bottom: 36px; }
+  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+  .avail { display: inline-flex; align-items: center; gap: 9px; font-size: .77rem; color: var(--ink-25); }
+  .hero-bar {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--ink-08);
+    padding: 0 60px;
+    opacity: 0; animation: fadeUp .7s var(--ease) .7s forwards;
+  }
+  .hstat { padding: 30px 0; border-right: 1px solid var(--ink-08); }
+  .hstat:last-child { border-right: none; }
+  .hstat:not(:first-child) { padding-left: 40px; }
+  .hstat-n {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    line-height: 1; letter-spacing: -.04em; color: var(--ink);
+    display: flex; align-items: baseline; gap: 1px;
+  }
+  .hstat-n .sup { font-size: 1rem; color: var(--tc); }
+  .hstat-l { margin-top: 5px; font-size: .68rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-25); font-weight: 500; }
+  @media (max-width: 880px) {
+    .hero-inner { grid-template-columns: 1fr; padding: 110px 24px 56px; gap: 36px; }
+    .hero-bar { padding: 0 24px; }
+    .hero-rt { opacity: 1; transform: none; animation: none; }
+  }
+
+  /* ── About ───────────────────────────────────────── */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 56px; }
+  .about-body { font-size: .97rem; color: var(--ink-55); line-height: 1.85; }
+  .about-body p + p { margin-top: 16px; }
+  .about-body strong { color: var(--ink); font-weight: 600; }
+  .pillars { display: flex; flex-direction: column; gap: 2px; }
+  .pillar {
+    display: grid; grid-template-columns: 40px 1fr;
+    gap: 18px; align-items: start; padding: 22px 24px;
+    border: 1px solid var(--ink-08); border-left: 2.5px solid transparent;
+    border-radius: var(--r); background: var(--warm-wht);
+    transition: border-left-color .25s, background .25s, transform .25s var(--ease);
+  }
+  .pillar:hover { border-left-color: var(--tc); background: var(--beige); transform: translateX(4px); }
+  .pillar-n { font-size: .67rem; font-weight: 700; color: var(--tc); letter-spacing: .07em; padding-top: 2px; }
+  .pillar h4 { font-size: .93rem; font-weight: 600; margin-bottom: 5px; letter-spacing: -.01em; }
+  .pillar p { font-size: .83rem; color: var(--ink-55); line-height: 1.65; }
+  @media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  /* ── Journey ─────────────────────────────────────── */
+  .journey-intro { max-width: 640px; margin-bottom: 56px; }
+  .journey-intro p { margin-top: 14px; font-size: .97rem; color: var(--off-m); line-height: 1.8; }
+
+  /* Uniform 3-col grid */
+  .jgrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  /* Base card */
+  .jcard-v2 {
+    background: var(--dark-s);
+    border: 1px solid var(--dark-bdr);
+    border-radius: 18px;
+    padding: 28px 26px 24px;
+    display: flex; flex-direction: column;
+    min-height: 310px;
+    position: relative; overflow: hidden;
+    text-decoration: none; color: inherit;
+    transition:
+      border-color .4s var(--ease),
+      transform   .5s var(--ease),
+      box-shadow  .5s var(--ease),
+      background  .4s var(--ease);
+    will-change: transform;
+    cursor: pointer;
+  }
+
+  /* Founder emphasis */
+  .jcard-v2.founder { border-color: rgba(224,96,72,.18); min-height: 340px; }
+
+  /* Top accent sweep */
+  .jcard-v2::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--tc-dk) 0%, transparent 100%);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .55s var(--ease);
+    z-index: 2;
+  }
+
+  /* Shine sweep */
+  .jcard-v2 .jcard-shine {
+    position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.04) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform .7s var(--ease);
+  }
+
+  .jcard-v2:hover {
+    border-color: rgba(224,96,72,.35);
+    transform: translateY(-8px);
+    box-shadow: 0 28px 72px rgba(0,0,0,.45), 0 0 0 1px rgba(224,96,72,.12);
+    background: var(--dark-s2);
+  }
+  .jcard-v2:hover::before { transform: scaleX(1); }
+  .jcard-v2:hover .jcard-shine { transform: translateX(120%); }
+
+  /* Logo area */
+  .jlogo {
+    width: 68px; height: 68px; border-radius: 15px;
+    background: #ffffff;
+    display: flex; align-items: center; justify-content: center;
+    padding: 11px; flex-shrink: 0; overflow: hidden;
+    margin-bottom: 20px; position: relative; z-index: 2;
+    transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+    box-shadow: 0 4px 18px rgba(0,0,0,.3), 0 0 0 1px rgba(255,255,255,.1);
+  }
+  .jcard-v2:hover .jlogo {
+    transform: scale(1.08) translateY(-3px);
+    box-shadow: 0 14px 34px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.15);
+  }
+  .jlogo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .jlogo.lm {
+    padding: 0;
+    background: linear-gradient(135deg,#15803D,#22C55E);
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.6rem; font-style: italic; color: #fff;
+  }
+
+  /* Role + period row */
+  .jcard-badges {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 8px; position: relative; z-index: 2;
+    flex-wrap: wrap;
+  }
+  .jcard-role-pill {
+    font-size: .6rem; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--tc-dk);
+    padding: 2px 9px; border: 1px solid rgba(224,96,72,.3); border-radius: 100px;
+  }
+  .jcard-yr { font-size: .68rem; color: rgba(240,232,223,.3); }
+
+  /* Company name */
+  .jcard-co {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.35rem, 2vw, 1.75rem);
+    font-style: italic; line-height: 1.05; letter-spacing: -.03em;
+    color: var(--off-wht); margin-bottom: 9px;
+    position: relative; z-index: 2;
+  }
+
+  /* Description */
+  .jcard-blurb {
+    font-size: .8rem; color: rgba(240,232,223,.42);
+    line-height: 1.7; flex: 1; margin-bottom: 20px;
+    position: relative; z-index: 2;
+  }
+
+  /* Footer row */
+  .jcard-foot {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    border-top: 1px solid var(--dark-bdr); padding-top: 14px;
+    position: relative; z-index: 2;
+  }
+  .jcard-stat-n {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.45rem; line-height: 1; letter-spacing: -.04em; color: var(--off-wht);
+    transition: color .3s;
+  }
+  .jcard-v2:hover .jcard-stat-n { color: var(--tc-dk); }
+  .jcard-stat-l { font-size: .58rem; letter-spacing: .07em; text-transform: uppercase; color: rgba(240,232,223,.28); margin-top: 2px; }
+  .jcard-arrow {
+    font-size: .7rem; font-weight: 600; letter-spacing: .05em;
+    text-transform: uppercase; color: var(--tc-dk);
+    display: inline-flex; align-items: center; gap: 4px;
+    transition: gap .3s var(--ease), color .2s, opacity .3s;
+    opacity: .65;
+  }
+  .jcard-v2:hover .jcard-arrow { gap: 9px; opacity: 1; color: #ff7a5c; }
+
+  @media (max-width: 900px) { .jgrid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px)  { .jgrid { grid-template-columns: 1fr; } }
+
+  /* ── Services ────────────────────────────────────── */
+  .srv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 56px; }
+  .srv-card {
+    background: var(--dark-s); border: 1px solid var(--dark-bdr);
+    border-radius: var(--r); padding: 36px 32px;
+    position: relative; overflow: hidden;
+    transition: border-color .3s, transform .35s var(--ease), box-shadow .35s var(--ease);
+    will-change: transform;
+  }
+  .srv-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--tc-dk); transform: scaleX(0); transform-origin: left;
+    transition: transform .45s var(--ease);
+  }
+  .srv-card:hover { border-color: rgba(224,96,74,.25); transform: translateY(-5px); box-shadow: 0 16px 52px rgba(0,0,0,.35); }
+  .srv-card:hover::before { transform: scaleX(1); }
+  .srv-num { font-family: 'Instrument Serif', serif; font-size: 2.8rem; font-style: italic; line-height: 1; color: rgba(240,232,223,.08); margin-bottom: 22px; }
+  .srv-title { font-size: .95rem; font-weight: 600; color: var(--off-wht); margin-bottom: 9px; letter-spacing: -.01em; }
+  .srv-desc { font-size: .83rem; color: var(--off-m); line-height: 1.72; margin-bottom: 20px; }
+  @media (max-width: 880px) { .srv-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px)  { .srv-grid { grid-template-columns: 1fr; } }
+
+  /* ── Work ────────────────────────────────────────── */
+  .work-list { margin-top: 56px; }
+  .case-row {
+    display: grid; grid-template-columns: 56px 1fr auto;
+    gap: 36px; align-items: center;
+    padding: 32px 0; border-bottom: 1px solid var(--ink-08);
+    position: relative;
+    transition: padding-left .3s var(--ease);
+  }
+  .case-row:first-child { border-top: 1px solid var(--ink-08); }
+  .case-row::before {
+    content: ''; position: absolute; left: -4px; top: 0; bottom: 0;
+    width: 2.5px; background: var(--tc);
+    transform: scaleY(0); transform-origin: top;
+    transition: transform .45s var(--ease);
+  }
+  .case-row:hover { padding-left: 16px; }
+  .case-row:hover::before { transform: scaleY(1); }
+  .case-idx { font-family: 'Instrument Serif', serif; font-size: 2rem; font-style: italic; color: var(--ink-08); line-height: 1; }
+  .case-cat {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: .66rem; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--tc); margin-bottom: 8px;
+  }
+  .case-cat::before { content:''; width:12px; height:1.5px; background:var(--tc); }
+  .case-title { font-size: 1.05rem; font-weight: 600; letter-spacing: -.015em; line-height: 1.3; margin-bottom: 7px; }
+  .case-desc { font-size: .83rem; color: var(--ink-55); line-height: 1.65; max-width: 480px; }
+  .case-nums { display: flex; gap: 28px; flex-shrink: 0; }
+  .cn { text-align: right; }
+  .cn-v { font-family: 'Instrument Serif', serif; font-size: 1.9rem; line-height: 1; letter-spacing: -.04em; color: var(--ink); }
+  .cn-l { font-size: .62rem; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-25); margin-top: 3px; }
+  @media (max-width: 760px) {
+    .case-row { grid-template-columns: 1fr; gap: 14px; }
+    .case-idx { display: none; }
+    .case-nums { justify-content: flex-start; gap: 22px; }
+    .case-row:hover { padding-left: 0; }
+  }
+
+  /* ── Process ─────────────────────────────────────── */
+  .proc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; margin-top: 56px; }
+  .proc-left p { margin-top: 22px; font-size: .97rem; color: var(--off-m); line-height: 1.82; max-width: 360px; }
+  .proc-steps { display: flex; flex-direction: column; }
+  .pstep {
+    display: grid; grid-template-columns: 52px 1fr;
+    gap: 18px; padding: 28px 0; border-bottom: 1px solid var(--dark-bdr);
+    transition: padding-left .3s var(--ease);
+  }
+  .pstep:first-child { border-top: 1px solid var(--dark-bdr); }
+  .pstep:last-child { border-bottom: none; }
+  .pstep:hover { padding-left: 8px; }
+  .pstep-n { font-size: .68rem; font-weight: 700; letter-spacing: .07em; color: var(--tc-dk); padding-top: 2px; }
+  .pstep h4 { font-size: .95rem; font-weight: 600; color: var(--off-wht); margin-bottom: 7px; letter-spacing: -.01em; }
+  .pstep p { font-size: .83rem; color: var(--off-m); line-height: 1.65; }
+  @media (max-width: 760px) { .proc-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  /* ── Testimonials ────────────────────────────────── */
+  .t-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 56px; }
+  .tcard {
+    padding: 36px 32px; background: var(--warm-wht);
+    border: 1px solid var(--ink-08); border-radius: var(--r);
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+    transform-style: preserve-3d;
+    transition: border-color .35s, box-shadow .35s var(--ease);
+    will-change: transform;
+  }
+  .tcard-shine { position: absolute; inset: 0; pointer-events: none; border-radius: var(--r); }
+  .tcard:hover { border-color: var(--tc-bd); box-shadow: 0 16px 52px rgba(192,72,48,.07); }
+  .tcard-qm { font-family: 'Instrument Serif', serif; font-size: 3.5rem; font-style: italic; line-height: .7; color: var(--tc); opacity: .22; display: block; margin-bottom: 14px; }
+  .tcard-text { font-size: .93rem; line-height: 1.8; color: var(--ink-55); flex: 1; margin-bottom: 26px; font-style: italic; }
+  .tcard-rule { width: 24px; height: 1.5px; background: var(--tc); opacity: .4; margin-bottom: 18px; }
+  .tcard-author { display: flex; align-items: center; gap: 12px; }
+  .tcard-av { width: 38px; height: 38px; border-radius: 50%; background: var(--tc-lt); border: 1.5px solid var(--tc-bd); display: flex; align-items: center; justify-content: center; font-size: .73rem; font-weight: 600; color: var(--tc); flex-shrink: 0; }
+  .tcard-name { font-size: .87rem; font-weight: 600; margin-bottom: 2px; }
+  .tcard-role { font-size: .73rem; color: var(--ink-25); }
+  @media (max-width: 880px) { .t-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px)  { .t-grid { grid-template-columns: 1fr; } }
+
+  /* ── CTA ─────────────────────────────────────────── */
+  #cta-sec { text-align: center; }
+  #cta-sec .sec-inner { padding-top: 140px; padding-bottom: 140px; }
+  .cta-h2 { font-family: 'Instrument Serif', serif; font-size: clamp(3rem, 7.5vw, 8rem); line-height: .94; letter-spacing: -.04em; color: var(--off-wht); margin-bottom: 24px; }
+  .cta-h2 em { font-style: italic; color: var(--tc-dk); }
+  .cta-sub { font-size: .97rem; color: var(--off-m); max-width: 420px; margin: 0 auto 52px; line-height: 1.8; }
+  .cta-row { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; }
+  .cta-email { font-size: .9rem; color: rgba(240,232,223,.3); transition: color .2s; }
+  .cta-email:hover { color: rgba(240,232,223,.6); }
+  .cta-sep { width: 1px; height: 18px; background: var(--dark-bdr); }
+  </style>
+</head>
+<body>
+
+<div id="prog"></div>
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<div id="mob-overlay">
+  <a class="mob-link" href="#about"         onclick="closeMob()">About</a>
+  <a class="mob-link" href="#journey"       onclick="closeMob()">Journey</a>
+  <a class="mob-link" href="#services"      onclick="closeMob()">Services</a>
+  <a class="mob-link" href="#work"          onclick="closeMob()">Work</a>
+  <a class="mob-link" href="#testimonials"  onclick="closeMob()">Proof</a>
+  <a class="mob-link" href="#cta-sec"       onclick="closeMob()">Let's Talk</a>
+  <span class="mob-email">shubh.ve@gmail.com</span>
+</div>
+
+<nav id="nav">
+  <a class="nav-logo" href="#hero">Shubham Verma</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#testimonials">Proof</a></li>
+  </ul>
+  <a class="nav-btn" href="#cta-sec">Let's Talk</a>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ── HERO (beige grid) ──────────────────────────── -->
+<section id="hero" class="lt-grid">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eye"><span class="ee">Serial Founder · GTM Architect · Revenue Operator</span></div>
+      <h1 class="hero-h1">
+        <span class="hline"><span class="hm">I started at 19.</span></span>
+        <span class="hline"><span class="hm">Crores built since.</span></span>
+        <span class="hline"><span class="hm"><em>Now I build yours.</em></span></span>
+      </h1>
+    </div>
+    <div class="hero-rt">
+      <p class="hero-desc">
+        Serial founder. GTM architect. I built my first company at 19, was selected from 200,000+ applications to pitch to Sony's management team at Shark Tank India Season 2, and have since scaled a ₹10Cr GMV vertical, built $10M in remittance systems, and launched Grantsetu, a GovTech startup targeting ₹5 lakh crore in government subsidies for Indian manufacturers. I do not advise from the sidelines. I embed and build.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-dk" href="#journey">My Journey →</a>
+        <a class="btn btn-out" href="#cta-sec">Work Together</a>
+      </div>
+      <div class="avail">
+        <span class="avail-dot"></span>
+        Taking select consulting engagements · 2026
+      </div>
+      <div class="avail" style="margin-top:10px">
+        <a href="https://www.linkedin.com/in/shubhamverma1410/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:5px"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn · <span style="color:var(--tc)">12k+</span></a>
+      </div>
+      <div class="avail" style="margin-top:10px">
+        <a href="https://wa.me/919591111111" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:5px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp me →</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bar">
+    <div class="hstat">
+      <div class="hstat-n" id="hs1">2<span class="sup"> cos</span></div>
+      <div class="hstat-l">Founded</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n" id="hs2">₹10<span class="sup">Cr</span></div>
+      <div class="hstat-l">GMV Built</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n" id="hs3">$10<span class="sup">M+</span></div>
+      <div class="hstat-l">Remittances Driven</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT (warm white) ─────────────────────────── -->
+<section id="about" class="sec lt-solid">
+  <div class="sec-inner">
+    <div class="s-eye rv">Who I Am</div>
+    <h2 class="sec-h2 rv d1">Started at 19.<br/><em>Built what most people only plan.</em></h2>
+    <div class="about-grid">
+      <div>
+        <div class="about-body rv d2">
+          <p>I built my first company at 19 while studying engineering at Manipal University. Aural was a social audio platform for India's next billion users. It failed. I did not care. Selected from 200,000+ applications, we pitched directly to Sony's management team at <strong>Shark Tank India Season 2</strong> — and it taught me more about building than any degree ever could.</p>
+          <p>I ran a 30-person team at zero salaries. Filed trademarks. Secured Microsoft incubation. Shipped product. All before I graduated.</p>
+          <p>Since then I have operated at the intersection of GTM, growth, and product across a global neobank, a YC-backed creator economy SaaS, and multi-crore SME programs. I am now building <strong>Grantsetu</strong>, a GovTech platform unlocking ₹5 lakh crore in government subsidies for Indian manufacturers.</p>
+        </div>
+        <div class="pull-quote rv d3">
+          "I have failed, pivoted, shipped, and scaled. Experience was never going to wait for a degree."
+        </div>
+      </div>
+      <div class="pillars">
+        <div class="pillar rv d1">
+          <div class="pillar-n">01</div>
+          <div><h4>Builder First</h4><p>I have incorporated companies, filed trademarks, and shipped products before most people have their first full-time job. I do not hand over decks and disappear. I stay in the trenches.</p></div>
+        </div>
+        <div class="pillar rv d2">
+          <div class="pillar-n">02</div>
+          <div><h4>GTM as a Discipline</h4><p>₹10Cr GMV. $10M remittances. Multi-crore coaching programs. Every single one built from zero. I build systems that run without me, not campaigns that die when I leave.</p></div>
+        </div>
+        <div class="pillar rv d3">
+          <div class="pillar-n">03</div>
+          <div><h4>Founder Empathy</h4><p>I have built with no money, managed people on zero salaries, and watched something I poured two years into not make it. That context is what separates me from a consultant who has never shipped.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── JOURNEY (dark grid) ────────────────────────── -->
+<section id="journey" class="sec dk-grid">
+  <div class="sec-inner">
+    <div class="journey-intro rv">
+      <div class="s-eye">My Journey</div>
+      <h2 class="sec-h2">Every chapter<br/>added a <em>new level.</em></h2>
+      <p>Two companies founded. Three built as a full-time operator. Two as a consultant. Each one sharpened the same edge: the ability to build what did not exist before.</p>
+    </div>
+
+    <div class="jgrid">
+
+      <!-- Aural -->
+      <a class="jcard-v2 founder rv d1" href="aural.html" target="_blank" rel="noopener">
+        <div class="jcard-shine"></div>
+        <div class="jlogo">
+          <img src="logos/aurallogoblackwithouttext.png" alt="Aural"/>
+        </div>
+        <div class="jcard-badges">
+          <span class="jcard-role-pill">Founder &amp; CEO</span>
+          <span class="jcard-yr">2022 — 2024</span>
+        </div>
+        <div class="jcard-co">Aural</div>
+        <p class="jcard-blurb">Social audio platform for India's next billion users. Built at 19. Led a 30-person team at zero salaries. Selected from 200,000+ applications to pitch to Sony's management team at Shark Tank India Season 2. My first real education in what building actually costs.</p>
+        <div class="jcard-foot">
+          <div>
+            <div class="jcard-stat-n">S2</div>
+            <div class="jcard-stat-l">Shark Tank India Finals</div>
+          </div>
+          <span class="jcard-arrow">Read Story →</span>
+        </div>
+      </a>
+
+      <!-- GrantSetu -->
+      <a class="jcard-v2 founder rv d2" href="grantsetu.html" target="_blank" rel="noopener">
+        <div class="jcard-shine"></div>
+        <div class="jlogo">
+          <img src="logos/Grantsetu-5.png" alt="GrantSetu"/>
+        </div>
+        <div class="jcard-badges">
+          <span class="jcard-role-pill">Co-Founder</span>
+          <span class="jcard-yr">2025 — Present</span>
+        </div>
+        <div class="jcard-co">GrantSetu</div>
+        <p class="jcard-blurb">Helping Indian manufacturers discover and apply for government subsidies they are legally owed but never knew existed. Free eligibility check. Paid application per scheme. ₹5 lakh crore addressable market. My current full-time build.</p>
+        <div class="jcard-foot">
+          <div>
+            <div class="jcard-stat-n">₹5L Cr</div>
+            <div class="jcard-stat-l">Addressable Market</div>
+          </div>
+          <span class="jcard-arrow">Read Story →</span>
+        </div>
+      </a>
+
+      <!-- Aspora -->
+      <a class="jcard-v2 rv d3" href="aspora.html" target="_blank" rel="noopener">
+        <div class="jcard-shine"></div>
+        <div class="jlogo">
+          <img src="logos/aspora.png" alt="Aspora"/>
+        </div>
+        <div class="jcard-badges">
+          <span class="jcard-role-pill">Growth &amp; PLG</span>
+          <span class="jcard-yr">2024 · 6 mo</span>
+        </div>
+        <div class="jcard-co">Aspora</div>
+        <p class="jcard-blurb">Global neobank for the Indian diaspora. Designed the PLG waitlist system and drove $10M in remittances across UAE and UK corridors. Learned what world-class product growth actually looks like.</p>
+        <div class="jcard-foot">
+          <div>
+            <div class="jcard-stat-n">$10M+</div>
+            <div class="jcard-stat-l">Remittances Enhanced</div>
+          </div>
+          <span class="jcard-arrow">Read Story →</span>
+        </div>
+      </a>
+
+      <!-- Exly -->
+      <a class="jcard-v2 rv d4" href="exly.html" target="_blank" rel="noopener">
+        <div class="jcard-shine"></div>
+        <div class="jlogo">
+          <img src="logos/exly_logo.jpeg" alt="Exly"/>
+        </div>
+        <div class="jcard-badges">
+          <span class="jcard-role-pill">Growth &amp; Verticals</span>
+          <span class="jcard-yr">2024–25 · 18 mo</span>
+        </div>
+        <div class="jcard-co">Exly</div>
+        <p class="jcard-blurb">YC-backed creator economy SaaS for 100k+ coaches. Spotted the revenue ceiling in a pure SaaS model before anyone else did. Built the Creator Incubation vertical from zero. ₹10Cr GMV. Take rate scaled from 3% to 20%.</p>
+        <div class="jcard-foot">
+          <div>
+            <div class="jcard-stat-n">₹10Cr</div>
+            <div class="jcard-stat-l">GMV Built</div>
+          </div>
+          <span class="jcard-arrow">Read Story →</span>
+        </div>
+      </a>
+
+      <!-- GAPS -->
+      <a class="jcard-v2 rv d5" href="gaps.html" target="_blank" rel="noopener">
+        <div class="jcard-shine"></div>
+        <div class="jlogo" style="padding:3px">
+          <img src="logos/gaps logo.png" alt="GAPS"/>
+        </div>
+        <div class="jcard-badges">
+          <span class="jcard-role-pill">GTM Consultant</span>
+          <span class="jcard-yr">Consulting</span>
+        </div>
+        <div class="jcard-co">GAPS</div>
+        <p class="jcard-blurb">Growth programme for 10,000+ Indian SMEs by Rajiv K. Chawla. Co-built the full GTM stack, performance marketing, email systems, and program infrastructure from day one. Zero to multi-crore revenue.</p>
+        <div class="jcard-foot">
+          <div>
+            <div class="jcard-stat-n">Multi-Cr</div>
+            <div class="jcard-stat-l">Revenue Built</div>
+          </div>
+          <span class="jcard-arrow">Read Story →</span>
+        </div>
+      </a>
+
+      <!-- The Shakti Collective -->
+      <a class="jcard-v2 rv d6" href="shakti.html" target="_blank" rel="noopener">
+        <div class="jcard-shine"></div>
+        <div class="jlogo" style="padding:3px">
+          <img src="logos/theshakticollective.png" alt="The Shakti Collective"/>
+        </div>
+        <div class="jcard-badges">
+          <span class="jcard-role-pill">Growth Consultant</span>
+          <span class="jcard-yr">Consulting</span>
+        </div>
+        <div class="jcard-co">The Shakti Collective</div>
+        <p class="jcard-blurb">India's premium music education platform. Co-founded by ex-VP of Yash Raj Films and Sandesh Shandilya with over 1B Spotify streams. Brought in to build the launch GTM and paid acquisition strategy from scratch.</p>
+        <div class="jcard-foot">
+          <div>
+            <div class="jcard-stat-n">1B+</div>
+            <div class="jcard-stat-l">Spotify Streams</div>
+          </div>
+          <span class="jcard-arrow">Read Story →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES (dark grid) ───────────────────────── -->
+<section id="services" class="sec dk-grid">
+  <div class="sec-inner">
+    <div class="s-eye rv">What I Do</div>
+    <h2 class="sec-h2 rv d1">Engagements built for<br/><em>revenue, not retainers</em></h2>
+    <div class="srv-grid">
+      <div class="srv-card rv d1"><div class="srv-num">01</div><div class="srv-title">GTM Strategy &amp; Launch</div><p class="srv-desc">Full go-to-market architecture. ICP, positioning, channel mix, pricing, and launch sequencing designed to drive revenue from month one. Not month six.</p><div class="chips"><span class="chip">ICP</span><span class="chip">Positioning</span><span class="chip">Channels</span></div></div>
+      <div class="srv-card rv d2"><div class="srv-num">02</div><div class="srv-title">Revenue Operations</div><p class="srv-desc">CRM architecture, pipeline visibility, attribution modeling, and a reporting stack that tells you exactly what is working and what is burning cash. No more guessing.</p><div class="chips"><span class="chip">CRM</span><span class="chip">Attribution</span><span class="chip">Forecasting</span></div></div>
+      <div class="srv-card rv d3"><div class="srv-num">03</div><div class="srv-title">Demand Generation</div><p class="srv-desc">Multi-channel programs that fill pipeline week after week. Inbound, outbound, partnerships, all engineered to compound instead of plateau.</p><div class="chips"><span class="chip">Inbound</span><span class="chip">Outbound</span><span class="chip">ABM</span></div></div>
+      <div class="srv-card rv d4"><div class="srv-num">04</div><div class="srv-title">Product-Led Growth</div><p class="srv-desc">Turn your product into your best salesperson. Activation funnels, viral loops, and expansion motions built to self-sustain. I have built this inside a YC-backed SaaS. I know what actually works.</p><div class="chips"><span class="chip">Onboarding</span><span class="chip">Activation</span><span class="chip">Expansion</span></div></div>
+      <div class="srv-card rv d5"><div class="srv-num">05</div><div class="srv-title">Sales Enablement</div><p class="srv-desc">Messaging frameworks, battle cards, and demo playbooks that shorten your sales cycle and lift win rates. Built for teams who are tired of losing deals they should be winning.</p><div class="chips"><span class="chip">Playbooks</span><span class="chip">Messaging</span><span class="chip">Training</span></div></div>
+      <div class="srv-card rv d6"><div class="srv-num">06</div><div class="srv-title">Growth Advisory</div><p class="srv-desc">Fractional GTM leadership from someone who has built from zero, not just advised from a distance. Senior firepower without the full-time price tag. Board-ready metrics included.</p><div class="chips"><span class="chip">Fractional</span><span class="chip">Advisory</span><span class="chip">Board Prep</span></div></div>
+      <div class="srv-card rv d1"><div class="srv-num">07</div><div class="srv-title">Email &amp; WhatsApp Automations</div><p class="srv-desc">Revenue-generating automation sequences built on your existing stack. Onboarding drips, re-engagement flows, cart recovery, and WhatsApp campaigns that run 24/7 without your team lifting a finger.</p><div class="chips"><span class="chip">Email</span><span class="chip">WhatsApp</span><span class="chip">Automation</span></div></div>
+      <div class="srv-card rv d2"><div class="srv-num">08</div><div class="srv-title">Website Development</div><p class="srv-desc">High-conversion websites built fast. Landing pages, portfolio sites, and product marketing pages designed to move visitors to action — not just look good on a portfolio.</p><div class="chips"><span class="chip">Landing Pages</span><span class="chip">Conversion</span><span class="chip">No-Code</span></div></div>
+      <div class="srv-card rv d3"><div class="srv-num">09</div><div class="srv-title">Agentic AI Training</div><p class="srv-desc">Hands-on training for founders and teams on deploying AI agents that actually save time and create leverage. From prompt engineering to workflow automation — practical, not theoretical.</p><div class="chips"><span class="chip">AI Agents</span><span class="chip">Automation</span><span class="chip">Training</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WORK (beige grid) ──────────────────────────── -->
+<section id="work" class="sec lt-grid">
+  <div class="sec-inner">
+    <div class="s-eye rv">Impact</div>
+    <h2 class="sec-h2 rv d1">Numbers that are<br/><em>hard to argue with</em></h2>
+    <div class="work-list">
+      <div class="case-row rv d1">
+        <div class="case-idx">01</div>
+        <div>
+          <div class="case-cat">Creator Economy · Exly</div>
+          <div class="case-title">Built a new revenue vertical from zero. ₹10 Crore GMV in 18 months.</div>
+          <p class="case-desc">Spotted the revenue ceiling in Exly's pure SaaS model before anyone else saw it. Pitched, got buy-in, and built the Creator Incubation vertical from scratch. Take rate scaled from 3.1% to 20%. A revenue-share engine that grew creators and the business at the same time.</p>
+        </div>
+        <div class="case-nums">
+          <div class="cn"><div class="cn-v">₹10Cr</div><div class="cn-l">GMV Built</div></div>
+          <div class="cn"><div class="cn-v">0→1</div><div class="cn-l">Vertical</div></div>
+        </div>
+      </div>
+      <div class="case-row rv d2">
+        <div class="case-idx">02</div>
+        <div>
+          <div class="case-cat">Fintech · Aspora</div>
+          <div class="case-title">Drove $10 Million in remittances across UAE and UK corridors in under 6 months.</div>
+          <p class="case-desc">Designed the PLG waitlist engine for Aspora's NRI banking product from scratch. Used user research and growth system design to drive over $10M in enhanced remittance volumes across two international corridors.</p>
+        </div>
+        <div class="case-nums">
+          <div class="cn"><div class="cn-v">$10M</div><div class="cn-l">Remittances</div></div>
+          <div class="cn"><div class="cn-v">PLG</div><div class="cn-l">System Built</div></div>
+        </div>
+      </div>
+      <div class="case-row rv d3">
+        <div class="case-idx">03</div>
+        <div>
+          <div class="case-cat">SME Coaching · GAPS</div>
+          <div class="case-title">Built a multi-crore SME coaching program from the ground up.</div>
+          <p class="case-desc">Designed and launched the full GTM, performance marketing, email infrastructure, and online and offline program delivery for GAPS by Rajiv K. Chawla. Took it from a concept to a multi-crore revenue programme serving 10,000+ Indian SMEs.</p>
+        </div>
+        <div class="case-nums">
+          <div class="cn"><div class="cn-v">Multi-Cr</div><div class="cn-l">Revenue</div></div>
+          <div class="cn"><div class="cn-v">0→1</div><div class="cn-l">Program</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS (dark grid) ────────────────────────── -->
+<section id="process" class="sec dk-grid">
+  <div class="sec-inner">
+    <div class="proc-grid">
+      <div class="proc-left rv-l">
+        <div class="s-eye">How I Work</div>
+        <h2 class="sec-h2">A process that creates<br/><em>momentum in week one</em></h2>
+        <p>No 90-day discovery reports. No deck handoffs. I create early wins and build durable systems at the same time. You see results while the foundation is still being laid.</p>
+      </div>
+      <div class="proc-steps">
+        <div class="pstep rv d1"><div class="pstep-n">01 —</div><div><h4>Diagnose</h4><p>Deep dive into your pipeline, ICP, unit economics, and competitive position. Data and honest conversations that surface the real constraint, not the symptom.</p></div></div>
+        <div class="pstep rv d2"><div class="pstep-n">02 —</div><div><h4>Design</h4><p>Build the full GTM blueprint. Positioning, channels, motion, and a 90-day execution roadmap tied directly to the revenue number you care about.</p></div></div>
+        <div class="pstep rv d3"><div class="pstep-n">03 —</div><div><h4>Execute</h4><p>I embed with your team and own execution until the system runs without me. I have built from zero before. I know what getting hands dirty actually means.</p></div></div>
+        <div class="pstep rv d4"><div class="pstep-n">04 —</div><div><h4>Compound</h4><p>Dashboards, feedback loops, and learning systems that make growth compound long after the engagement ends. The goal is never dependency. It is momentum you own.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── CTA (dark grid) ────────────────────────────── -->
+<section id="cta-sec" class="sec dk-grid">
+  <div class="sec-inner" style="text-align:center">
+    <div class="s-eye rv" style="justify-content:center">Let's Work Together</div>
+    <h2 class="cta-h2 rv d1">Ready to stop planning<br/><em>and start building?</em></h2>
+    <p class="cta-sub rv d2">I take a limited number of engagements per quarter. If you are building something that actually matters and need someone who has done it before, let's talk.</p>
+    <div class="cta-row rv d3">
+      <div id="mag-wrap"><a class="btn btn-tc" href="mailto:shubh.ve@gmail.com">Get In Touch →</a></div>
+      <div class="cta-sep"></div>
+      <a class="cta-email" href="mailto:shubh.ve@gmail.com">shubh.ve@gmail.com</a>
+      <a class="cta-email" href="https://www.linkedin.com/in/shubhamverma1410/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:5px"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn · <span style="color:var(--tc)">12k+</span></a>
+      <a class="cta-email" href="https://wa.me/919591111111" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:5px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">Shubham Verma</div>
+  <div class="f-links">
+    <a href="https://www.linkedin.com/in/shubhamverma1410/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:5px"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn · <span style="color:var(--tc)">12k+</span></a>
+    <a href="https://wa.me/919591111111" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;vertical-align:middle;margin-right:5px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+    <a href="https://grantsetu.com" target="_blank" rel="noopener">GrantSetu</a>
+  </div>
+  <div>© 2026 Shubham Verma</div>
+</footer>
+
+<script src="portfolio.js"></script>
+</body>
+</html>

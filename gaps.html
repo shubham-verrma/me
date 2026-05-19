@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GAPS — Shubham Verma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+  @property --glow-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+  }
+
+  @keyframes glow-spin {
+    to { --glow-angle: 360deg; }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.3; }
+    50%       { opacity: 0.72; }
+  }
+
+  .gal-grid {
+    columns: 2;
+    column-gap: 14px;
+    margin-top: 48px;
+  }
+
+  .gal-item {
+    break-inside: avoid;
+    margin: 0 0 14px 0;
+    display: inline-block;
+    width: 100%;
+    position: relative;
+  }
+
+  .gal-item::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 15px;
+    background: conic-gradient(
+      from var(--glow-angle),
+      transparent     0%,
+      var(--tc)       18%,
+      var(--tc-dk)    45%,
+      var(--tc)       78%,
+      transparent    100%
+    );
+    filter: blur(6px);
+    opacity: 0.5;
+    animation: glow-spin 3s linear infinite;
+    z-index: 0;
+    will-change: opacity;
+  }
+
+  .gal-item:hover::before {
+    animation-duration: 1.5s;
+    opacity: 0.88;
+    filter: blur(9px);
+  }
+
+  .gal-card {
+    position: relative;
+    z-index: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--warm-wht);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  .gal-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .gal-cap {
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--ink-25);
+    padding: 10px 14px 11px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+
+  @media (max-width: 600px) {
+    .gal-grid { columns: 1; }
+    .gal-item::before {
+      animation: glow-pulse 2.5s ease-in-out infinite;
+      filter: blur(8px);
+    }
+    .gal-item:hover::before {
+      animation-duration: 1.5s;
+    }
+  }
+  </style>
+</head>
+<body>
+
+<div id="prog"></div>
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<div id="mob-overlay">
+  <a class="mob-link" href="index.html#about"        onclick="closeMob()">About</a>
+  <a class="mob-link" href="index.html#journey"      onclick="closeMob()">Journey</a>
+  <a class="mob-link" href="index.html#services"     onclick="closeMob()">Services</a>
+  <a class="mob-link" href="index.html#work"         onclick="closeMob()">Work</a>
+  <a class="mob-link" href="index.html#testimonials" onclick="closeMob()">Proof</a>
+  <a class="mob-link" href="index.html#cta-sec"      onclick="closeMob()">Let's Talk</a>
+  <span class="mob-email">shubh.ve@gmail.com</span>
+</div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html">Shubham Verma</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#journey">Journey</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#testimonials">Proof</a></li>
+  </ul>
+  <a class="nav-btn" href="index.html#cta-sec">Let's Talk</a>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────────── -->
+<section class="dk-grid co-hero">
+  <div class="co-hero-inner">
+    <div>
+      <a class="co-back" href="index.html">Back to Portfolio</a>
+      <div class="co-role-badge">GTM Consultant</div>
+      <h1 class="co-name rv">GAPS</h1>
+      <div class="co-period rv d1">Consulting &nbsp;·&nbsp; SME Coaching &amp; Growth</div>
+    </div>
+    <div class="co-right rv-r">
+      <div class="co-big-num">Multi-Cr</div>
+      <div class="co-big-label">Revenue Built from Zero</div>
+      <p class="co-tagline">
+        Growth Accelerator Program for SMEs — Rajiv K. Chawla's flagship SME coaching program.
+        I designed and launched the entire GTM, performance marketing stack,
+        and program infrastructure. Zero to multi-crore.
+      </p>
+    </div>
+  </div>
+  <div class="co-stat-bar rv">
+    <div class="co-stat">
+      <div class="co-stat-n">0→1</div>
+      <div class="co-stat-l">Program Launched</div>
+    </div>
+    <div class="co-stat">
+      <div class="co-stat-n">Multi-Cr</div>
+      <div class="co-stat-l">Revenue Achieved</div>
+    </div>
+    <div class="co-stat">
+      <div class="co-stat-n">Full</div>
+      <div class="co-stat-l">GTM Stack Built</div>
+    </div>
+    <div class="co-stat">
+      <div class="co-stat-n">SMEs</div>
+      <div class="co-stat-l">Audience Served</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE MAN BEHIND GAPS ────────────────────────────── -->
+<section class="sec lt-solid">
+  <div class="sec-inner">
+    <div class="story-grid">
+      <div>
+        <div class="s-eye rv">The Principal</div>
+        <h2 class="sec-h2 rv d1">The Man<br/><em>Behind GAPS</em></h2>
+        <div class="chips rv d2">
+          <span class="chip-lt">Jairaj Group</span>
+          <span class="chip-lt">I Am SME of India</span>
+          <span class="chip-lt">ICSI MSME Board</span>
+          <span class="chip-lt">Ministry of MSME</span>
+        </div>
+      </div>
+      <div class="story-body rv-r">
+        <p><strong>Rajiv K. Chawla</strong> is not a typical business coach. He is the Founder and Chairman of <strong>Jairaj Group of Industries</strong>, one of India's largest manufacturers of plastic bellows and automobile components. He is also the Founder of <strong>I am SME of India</strong>, one of the largest SME networks globally.</p>
+        <p>He sits on the board of ICSI's MSME and Startup Board, serves as Advisory Board Member at <strong>Mahatma Hansraj Centre for Innovation and Entrepreneurship</strong>, and is an Executive Committee Member at the Department of Science and Technology, Govt of Haryana.</p>
+        <p>He is also a Committee Member for the <strong>Strategic Investment Plans Evaluation Committee at the Ministry of MSME, Govt of India</strong> — evaluating proposals under the ₹6,000 crore RAMP Program.</p>
+        <p>Working alongside him was my entry point into understanding the real India: <strong>63 million MSMEs</strong>, most of them completely underserved.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STORY ─────────────────────────────────────────── -->
+<section class="sec lt-grid">
+  <div class="sec-inner">
+    <div class="story-grid">
+      <div>
+        <div class="s-eye rv">The Story</div>
+        <h2 class="sec-h2 rv d1">Expert knowledge.<br/><em>Zero distribution.</em></h2>
+        <div class="pull-quote rv d2">
+          "Rajiv K. Chawla had decades of hard-won knowledge on scaling SMEs. The problem wasn't the expertise — it was the engine. GAPS needed a complete GTM system built from the ground up."
+        </div>
+        <div class="chips rv d3">
+          <span class="chip-lt">GTM Strategy</span>
+          <span class="chip-lt">Performance Marketing</span>
+          <span class="chip-lt">Program Launch</span>
+          <span class="chip-lt">SME Coaching</span>
+          <span class="chip-lt">Tech Infrastructure</span>
+        </div>
+      </div>
+      <div class="story-body rv-r">
+        <p><strong>Rajiv K. Chawla</strong> is one of India's most respected SME coaches — a practitioner who had spent years helping small and medium businesses fix the operational and strategic gaps that keep them stuck. When he decided to formalise that knowledge into a structured coaching program, he needed a partner who could build the entire commercial engine around it.</p>
+        <p>That's where I came in. GAPS — <em>Growth Accelerator Program for SMEs</em> — had the content and the credibility. What it didn't have was a <strong>complete GTM system</strong>: no performance marketing infrastructure, no digital presence built for conversion, no program delivery technology, and no clear go-to-market sequencing for reaching SME founders at scale.</p>
+        <p>I designed and deployed the full stack. That included the <strong>positioning and messaging strategy</strong> to differentiate GAPS in a crowded coaching market, the <strong>performance marketing architecture</strong> across paid search, social, and retargeting, the <strong>tech infrastructure</strong> to support online and offline program delivery, and the <strong>launch sequencing</strong> that turned initial interest into enrolled cohorts.</p>
+        <p>The result was a program that went from zero to multi-crore revenue — with a repeatable acquisition model that could scale cohort over cohort. GAPS became a case study in what happens when genuine expertise meets a disciplined, well-funded GTM engine built from first principles.</p>
+        <p>This engagement is what built my <strong>deep understanding of the Indian SME sector</strong>. We spoke directly with <strong>6,000+ SME founders</strong> across industries, geographies, and revenue sizes — learning how they think, what they fear, and what actually moves them to act.</p>
+        <p>It also taught me how to sell <strong>high-ticket programs at ₹2 lakh and above per unit</strong> — understanding what makes a founder trust you with that kind of commitment. Credibility, specificity, and proof are the only things that close at that price point.</p>
+        <p>This on-ground exposure is the foundation of everything I now build for MSMEs, including <strong>Grantsetu</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── IMPACT ─────────────────────────────────────────── -->
+<section class="sec dk-grid">
+  <div class="sec-inner">
+    <div class="s-eye rv">Impact</div>
+    <h2 class="sec-h2 rv d1">A complete system.<br/><em>From nothing.</em></h2>
+    <div class="impact-grid">
+      <div class="impact-card rv d1">
+        <div class="impact-n">Multi<em>-Cr</em></div>
+        <div class="impact-l">Revenue from Zero</div>
+        <p class="impact-desc">GAPS went from a concept to a multi-crore revenue program — with a cohort model, a repeatable acquisition funnel, and a delivery system that could scale without breaking.</p>
+      </div>
+      <div class="impact-card rv d2">
+        <div class="impact-n">Full</div>
+        <div class="impact-l">GTM Stack Deployed</div>
+        <p class="impact-desc">Designed and deployed every layer: brand positioning, performance marketing (paid search + social), landing pages optimised for conversion, CRM, email nurture, and offline event strategy.</p>
+      </div>
+      <div class="impact-card rv d3">
+        <div class="impact-n">360°</div>
+        <div class="impact-l">Program Infrastructure</div>
+        <p class="impact-desc">Built the technology backbone for program delivery — LMS setup, cohort management, online session infrastructure, and offline bootcamp logistics — unified under a single operational system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LEARNINGS ──────────────────────────────────────── -->
+<section class="sec lt-solid">
+  <div class="sec-inner">
+    <div class="s-eye rv">What I Learned</div>
+    <h2 class="sec-h2 rv d1">Selling to<br/><em>SME founders.</em></h2>
+    <div class="learn-grid">
+      <div class="learn-card rv d1">
+        <div class="learn-n">01</div>
+        <h4>SME founders buy outcomes, not curricula</h4>
+        <p>Nobody buys a coaching program because of the syllabus. They buy because they see a version of themselves on the other side — more revenue, less chaos, more control. Messaging has to be ruthlessly outcome-focused.</p>
+      </div>
+      <div class="learn-card rv d2">
+        <div class="learn-n">02</div>
+        <h4>Trust is built offline, even if the funnel is digital</h4>
+        <p>Performance marketing can fill a webinar. But for high-ticket SME coaching, the trust that converts comes from in-person events, peer referrals, and direct community touchpoints. Digital brings them in; humans close the deal.</p>
+      </div>
+      <div class="learn-card rv d3">
+        <div class="learn-n">03</div>
+        <h4>The coach's brand is the product</h4>
+        <p>In coaching businesses, the founder's credibility is the primary asset. Every GTM decision — content, channel, event — needs to be designed to amplify and protect that credibility, not shortcut it.</p>
+      </div>
+      <div class="learn-card rv d4">
+        <div class="learn-n">04</div>
+        <h4>Cohort-based programs need momentum mechanics</h4>
+        <p>The jump from "interested" to "enrolled" in cohort models requires urgency, social proof, and visible community. Scarcity that's real, testimonials that are specific, and cohort windows that are firm — these are the levers that convert.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ─────────────────────────────────────────── -->
+<section class="sec lt-solid">
+  <div class="sec-inner">
+    <div class="s-eye rv">In The Room</div>
+    <h2 class="sec-h2 rv d1">Moments from<br/><em>GAPS</em></h2>
+    <div class="gal-grid">
+
+      <figure class="gal-item rv d1">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/GAPS/IPO success party of one of GAPS members.jpeg" alt="IPO Success Party — GAPS Member"/>
+          <figcaption class="gal-cap">IPO Success — GAPS Member</figcaption>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv d2">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/GAPS/access to The Camellias - community of achievers and unciron founders - our venue of GAPS events.jpeg" alt="The Camellias — GAPS Events Venue"/>
+          <figcaption class="gal-cap">The Camellias — GAPS Events Venue</figcaption>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv d3">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/GAPS/access to The Camellias - community of achievers and unciron founders.jpeg" alt="The Camellias — Community of Achievers"/>
+          <figcaption class="gal-cap">The Camellias — Community of Achievers</figcaption>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv d4">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/GAPS/bank collaborations.jpeg" alt="Bank Collaborations"/>
+          <figcaption class="gal-cap">Bank Collaborations</figcaption>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv d5">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/GAPS/hi tea with founders doing 100cr+ each.jpeg" alt="Hi-Tea with 100Cr+ Founders"/>
+          <figcaption class="gal-cap">Hi-Tea with 100Cr+ Founders</figcaption>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv d6">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/GAPS/networking 2.jpeg" alt="Networking"/>
+          <figcaption class="gal-cap">Networking</figcaption>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/GAPS/networking events at The Camellias.jpeg" alt="Networking Events at The Camellias"/>
+          <figcaption class="gal-cap">Networking Events at The Camellias</figcaption>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/GAPS/networking.jpeg" alt="Networking"/>
+          <figcaption class="gal-cap">Networking</figcaption>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/GAPS/offline events glimpse.jpeg" alt="Offline Events"/>
+          <figcaption class="gal-cap">Offline Events</figcaption>
+        </div>
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────────────────── -->
+<section class="dk-grid co-cta">
+  <div class="sec-inner">
+    <div class="s-eye rv" style="justify-content:center">Let's Build Together</div>
+    <h2 class="rv d1">Expert knowledge<br/><em>needs distribution.</em></h2>
+    <p class="rv d2">If you're building a coaching program, a service business, or a new revenue vertical — I build the GTM engine that gets it off the ground and keeps it growing.</p>
+    <div class="co-cta-row rv d3">
+      <a class="btn btn-tc" href="mailto:shubh.ve@gmail.com">Work With Me →</a>
+      <a class="btn btn-wht" href="index.html">← All Stories</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">Shubham Verma</div>
+  <div class="f-links">
+    <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+
+    <a href="https://grantsetu.com" target="_blank" rel="noopener">GrantSetu</a>
+  </div>
+  <div>© 2026 Shubham Verma</div>
+</footer>
+
+<script src="portfolio.js"></script>
+</body>
+</html>

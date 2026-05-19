@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aural — Shubham Verma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+  /* ── Animated glow border property ──────────────────── */
+  @property --glow-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+  }
+
+  @keyframes glow-spin {
+    to { --glow-angle: 360deg; }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.3; }
+    50%       { opacity: 0.72; }
+  }
+
+  /* ── Gallery grid ────────────────────────────────────── */
+  .gal-grid {
+    columns: 2;
+    column-gap: 14px;
+    margin-top: 48px;
+  }
+
+  /* Outer wrapper — carries the glow ::before, no overflow clip */
+  .gal-item {
+    break-inside: avoid;
+    margin: 0 0 14px 0;
+    display: inline-block;
+    width: 100%;
+    position: relative;
+  }
+
+  /* Rotating glow behind the card */
+  .gal-item::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 15px;
+    background: conic-gradient(
+      from var(--glow-angle),
+      transparent     0%,
+      var(--tc)       18%,
+      var(--tc-dk)    45%,
+      var(--tc)       78%,
+      transparent    100%
+    );
+    filter: blur(6px);
+    opacity: 0.5;
+    animation: glow-spin 3s linear infinite;
+    z-index: 0;
+    will-change: opacity;
+  }
+
+  .gal-item:hover::before {
+    animation-duration: 1.5s;
+    opacity: 0.88;
+    filter: blur(9px);
+  }
+
+  /* Inner card — clips content, sits above glow */
+  .gal-card {
+    position: relative;
+    z-index: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--warm-wht);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  .gal-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .gal-cap {
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--ink-25);
+    padding: 10px 14px 11px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+
+  /* Mobile — swap rotation for a simpler pulse to save GPU */
+  @media (max-width: 600px) {
+    .gal-grid { columns: 1; }
+    .gal-item::before {
+      animation: glow-pulse 2.5s ease-in-out infinite;
+      filter: blur(8px);
+    }
+    .gal-item:hover::before {
+      animation-duration: 1.5s;
+    }
+  }
+  </style>
+</head>
+<body>
+
+<div id="prog"></div>
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<div id="mob-overlay">
+  <a class="mob-link" href="index.html#about"        onclick="closeMob()">About</a>
+  <a class="mob-link" href="index.html#journey"      onclick="closeMob()">Journey</a>
+  <a class="mob-link" href="index.html#services"     onclick="closeMob()">Services</a>
+  <a class="mob-link" href="index.html#work"         onclick="closeMob()">Work</a>
+  <a class="mob-link" href="index.html#testimonials" onclick="closeMob()">Proof</a>
+  <a class="mob-link" href="index.html#cta-sec"      onclick="closeMob()">Let's Talk</a>
+  <span class="mob-email">shubh.ve@gmail.com</span>
+</div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html">Shubham Verma</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#journey">Journey</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#testimonials">Proof</a></li>
+  </ul>
+  <a class="nav-btn" href="index.html#cta-sec">Let's Talk</a>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────────── -->
+<section class="dk-grid co-hero">
+  <div class="co-hero-inner">
+    <div>
+      <a class="co-back" href="index.html">Back to Portfolio</a>
+      <div class="co-role-badge">Founder &amp; CEO</div>
+      <h1 class="co-name rv">Aural</h1>
+      <div class="co-period rv d1">2022 — 2024 &nbsp;·&nbsp; Social Audio</div>
+    </div>
+    <div class="co-right rv-r">
+      <div class="co-big-num">30+</div>
+      <div class="co-big-label">Team Built at Zero Salary</div>
+      <p class="co-tagline">
+        Audio-first social platform for India's next billion internet users.
+        Built from a Manipal dorm room. Selected from 200,000+ applications to pitch to Sony's management team at Shark Tank India Season 2.
+        The venture that made me a builder.
+      </p>
+    </div>
+  </div>
+  <div class="co-stat-bar rv">
+    <div class="co-stat">
+      <div class="co-stat-n">19</div>
+      <div class="co-stat-l">Age at Founding</div>
+    </div>
+    <div class="co-stat">
+      <div class="co-stat-n">30+</div>
+      <div class="co-stat-l">Team at ₹0 Salary</div>
+    </div>
+    <div class="co-stat">
+      <div class="co-stat-n">S2</div>
+      <div class="co-stat-l">Shark Tank India Finalist</div>
+    </div>
+    <div class="co-stat">
+      <div class="co-stat-n">5 yrs</div>
+      <div class="co-stat-l">Journey Length</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STORY ─────────────────────────────────────────── -->
+<section class="sec lt-grid">
+  <div class="sec-inner">
+    <div class="story-grid">
+      <div>
+        <div class="s-eye rv">The Story</div>
+        <h2 class="sec-h2 rv d1">Built on belief<br/><em>before revenue.</em></h2>
+        <div class="pull-quote rv d2">
+          "I started Aural at 19 with no money, no connections, and no clue what I was doing. What I had was a conviction that audio was the future for a billion Indians who couldn't read English fluently."
+        </div>
+        <div class="chips rv d3">
+          <span class="chip-lt">Social Audio</span>
+          <span class="chip-lt">Consumer Tech</span>
+          <span class="chip-lt">Next Billion Users</span>
+          <span class="chip-lt">Shark Tank India</span>
+        </div>
+      </div>
+      <div class="story-body rv-r">
+        <p>It was 2022. I was sitting in my engineering hostel at Manipal University when the idea crystallised — India's next billion internet users weren't going to engage with text-heavy social media. They'd listen. They'd speak. They needed a platform built for audio-first communities in local languages and dialects.</p>
+        <p>That insight became <strong>Aural</strong>. I started with nothing but a pitch deck and an unshakeable belief. No salary. No funding. No office. I convinced 30+ people — designers, developers, marketers, content creators — to join me and build for free. That alone taught me more about leadership than any MBA ever could.</p>
+        <p>I learned to <strong>incorporate a company, file trademarks</strong>, navigate legal frameworks, build product roadmaps, pitch investors, and manage a cross-functional team — all before I graduated. The venture took us all the way to <strong>Shark Tank India Season 2</strong>, where we were selected from 200,000+ applicants to pitch directly to Sony's management team.</p>
+        <p>Aural ultimately paused operations in 2024. The consumer social market in India is brutally hard — monetisation, retention, and cold start problems compounded faster than we could solve them. But the company gave me something money can't buy: <strong>the operating system of a founder</strong>. Every lesson from Aural informs every engagement I take on today.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ─────────────────────────────────────────── -->
+<section class="sec lt-solid">
+  <div class="sec-inner">
+    <div class="s-eye rv">In The Room</div>
+    <h2 class="sec-h2 rv d1">Moments from<br/><em>the journey.</em></h2>
+    <div class="gal-grid">
+
+      <figure class="gal-item rv d1">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/aural/sharktank.png" alt="Shark Tank India Season 2"/>
+          <figcaption class="gal-cap">Shark Tank India Season 2</figcaption>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv d2">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/aural/feedback.png" alt="Feedback"/>
+          <figcaption class="gal-cap">Feedback</figcaption>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv d3">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/aural/what team has to say 1.png" alt="What the team had to say"/>
+          <figcaption class="gal-cap">What The Team Had To Say</figcaption>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv d4">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/aural/what team has to say 2.png" alt="Team voices"/>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv d5">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/aural/what team has to say 2 continue.png" alt="Team voices continued"/>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv d6">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/aural/feedback_team 2.png" alt="Team feedback"/>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/aural/feedback_team 3.png" alt="Team feedback"/>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/aural/feedback_team 4.png" alt="Team feedback"/>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/aural/feedback_team 5.png" alt="Team feedback"/>
+        </div>
+      </figure>
+
+      <figure class="gal-item rv">
+        <div class="gal-card">
+          <img class="gal-img" src="journey/aural/feedback_team 6.png" alt="Team feedback"/>
+        </div>
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── IMPACT ─────────────────────────────────────────── -->
+<section class="sec dk-grid">
+  <div class="sec-inner">
+    <div class="s-eye rv">What We Built</div>
+    <h2 class="sec-h2 rv d1">Five years of doing<br/><em>the hard things first.</em></h2>
+    <div class="impact-grid">
+      <div class="impact-card rv d1">
+        <div class="impact-n">30<em>+</em></div>
+        <div class="impact-l">People Who Believed</div>
+        <p class="impact-desc">Built a team of 30+ designers, engineers, marketers and content leads who worked for zero salary — motivated entirely by the mission and vision.</p>
+      </div>
+      <div class="impact-card rv d2">
+        <div class="impact-n">S2</div>
+        <div class="impact-l">Shark Tank India Finalist</div>
+        <p class="impact-desc">Selected from 200,000+ applications to reach the finals of Shark Tank India Season 2 — and pitched directly to Sony's management team.</p>
+      </div>
+      <div class="impact-card rv d3">
+        <div class="impact-n">0→1</div>
+        <div class="impact-l">Full Company Built</div>
+        <p class="impact-desc">Incorporated the entity, filed trademarks, built the product, hired the team, secured Microsoft incubation, and shipped — all from a hostel room.</p>
+      </div>
+    </div>
+    <div class="pull-quote-dk rv d4">
+      "Aural didn't make me rich. It made me a builder. That distinction matters more than any revenue number."
+    </div>
+  </div>
+</section>
+
+<!-- ── LEARNINGS ──────────────────────────────────────── -->
+<section class="sec lt-solid">
+  <div class="sec-inner">
+    <div class="s-eye rv">What I Learned</div>
+    <h2 class="sec-h2 rv d1">The curriculum<br/><em>no college teaches.</em></h2>
+    <div class="learn-grid">
+      <div class="learn-card rv d1">
+        <div class="learn-n">01</div>
+        <h4>Mission beats money — until it doesn't</h4>
+        <p>You can attract incredible people with vision alone, but you can't sustain them. The transition from mission-driven to revenue-driven is where most consumer startups break. I learned it the hard way.</p>
+      </div>
+      <div class="learn-card rv d2">
+        <div class="learn-n">02</div>
+        <h4>Cold start is the only real problem in consumer social</h4>
+        <p>Every feature, every growth hack, every campaign is secondary to solving the cold start problem. Without liquidity and network effects in place from day one, the product never reaches escape velocity.</p>
+      </div>
+      <div class="learn-card rv d3">
+        <div class="learn-n">03</div>
+        <h4>The pitch is never the product</h4>
+        <p>Getting to Shark Tank taught me how to tell a compelling story. But I confused narrative momentum with product-market fit. The best founders I know are obsessed with the latter, not the former.</p>
+      </div>
+      <div class="learn-card rv d4">
+        <div class="learn-n">04</div>
+        <h4>Operations kill more startups than bad ideas</h4>
+        <p>Aural paused because of operational failures, not because the market didn't exist. Managing remote teams, cash flow, and delivery at zero salary is a full discipline on its own — and I wasn't prepared for it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────────────────── -->
+<section class="dk-grid co-cta">
+  <div class="sec-inner">
+    <div class="s-eye rv" style="justify-content:center">Let's Build Together</div>
+    <h2 class="rv d1">Hard lessons.<br/><em>Real leverage.</em></h2>
+    <p class="rv d2">Every mistake from Aural made me better at GTM, team building, and execution. I bring that experience to every client I work with.</p>
+    <div class="co-cta-row rv d3">
+      <a class="btn btn-tc" href="mailto:shubh.ve@gmail.com">Work With Me →</a>
+      <a class="btn btn-wht" href="index.html">← All Stories</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">Shubham Verma</div>
+  <div class="f-links">
+    <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+
+    <a href="https://grantsetu.com" target="_blank" rel="noopener">GrantSetu</a>
+  </div>
+  <div>© 2026 Shubham Verma</div>
+</footer>
+
+<script src="portfolio.js"></script>
+</body>
+</html>
